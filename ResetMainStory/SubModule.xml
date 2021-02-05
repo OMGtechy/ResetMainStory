@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Module>
+  <Name value="Reset Main Story"/>
+  <Id value="ResetMainStory"/>
+  <Version value="v1.0.0"/>
+  <SingleplayerModule value="true"/>
+  <MultiplayerModule value="false"/>
+  <DependedModules>
+    <DependedModule Id="Native" DependentVersion="e1.5.7"/>
+    <DependedModule Id="SandBoxCore" DependentVersion="e1.5.7"/>
+    <DependedModule Id="Sandbox" DependentVersion="e1.5.7"/>
+    <DependedModule Id="CustomBattle" DependentVersion="e1.5.7"/>
+    <DependedModule Id="StoryMode" DependentVersion="e1.5.7"/>
+  </DependedModules>
+  <SubModules>
+    <SubModule>
+      <Name value="ResetMainStory"/>
+      <DLLName value="ResetMainStory.dll"/>
+      <SubModuleClassType value="ResetMainStory.ResetMainStorySubModule"/>
+      <Tags>
+        <Tag key="DedicatedServerType" value="none" />
+        <Tag key="IsNoRenderModeElement" value="false" />
+      </Tags>
+    </SubModule>
+  </SubModules>
+  <Xmls/>
+</Module>
