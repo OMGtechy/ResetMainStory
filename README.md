@@ -13,3 +13,9 @@ I made this mod because I failed the main quest by taking too long. The mod rese
 7) Load your save.
 
 If you don't unload the mod, it'll reset the main quest every time you load.
+
+## Disclaimer
+
+I am some random person on the internet that reverse engineered the internals of the game to make this work. I am not affiliated with TaleWorlds or anything like that. I cannot take responsibility for what running this code does to your game, saves or machine.
+
+Use at your own risk.
