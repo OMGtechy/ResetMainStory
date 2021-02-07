@@ -12,6 +12,7 @@ namespace ResetMainStory
     public class ResetMainStorySubModule : MBSubModuleBase
     {
         private Game game;
+        private Campaign campaign;
         private bool once;
 
         public override void OnGameLoaded(Game game, object initializerObject)
@@ -19,6 +20,7 @@ namespace ResetMainStory
             if (game.GameType is CampaignStoryMode)
             {
                 this.game = game;
+                this.campaign = game.GameType as Campaign;
             }
         }
 
@@ -38,6 +40,22 @@ namespace ResetMainStory
 
                 var quest = ctor.Invoke(new object[] { elderBrother }) as QuestBase;
                 quest.StartQuest();
+
+                var mapTimeTrackerProperty = typeof(Campaign).GetProperty("MapTimeTracker", BindingFlags.NonPublic | BindingFlags.Instance);
+                var mapTimeTracker = mapTimeTrackerProperty.GetValue(campaign);
+
+                var campaignTimeNumTicksField = typeof(CampaignTime).GetField("_numTicks", BindingFlags.NonPublic | BindingFlags.Instance);
+                var campaignStartTimeNumTicks = campaignTimeNumTicksField.GetValue(CampaignData.CampaignStartTime);
+
+                var mapTimeTrackerNumTicksField = mapTimeTracker.GetType().GetField("_numTicks", BindingFlags.NonPublic | BindingFlags.Instance);
+                mapTimeTrackerNumTicksField.SetValue(mapTimeTracker, campaignStartTimeNumTicks);
+
+                var mapTimeTrackerNowProperty = mapTimeTracker.GetType().GetProperty("Now", BindingFlags.NonPublic | BindingFlags.Instance);
+                var mapTimeTrackerNow = mapTimeTrackerNowProperty.GetValue(mapTimeTracker);
+
+                var campaignStartTimeProperty = campaign.GetType().GetProperty("CampaignStartTime").DeclaringType.GetProperty("CampaignStartTime");
+                campaignStartTimeProperty.SetValue(campaign, mapTimeTrackerNow);
+
             }
         }
     }
